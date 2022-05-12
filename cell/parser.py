@@ -52,7 +52,7 @@ class Parser:
 
         elif typ == '=':
             # Assignment syntax tree, the lhs is the previous token
-            if prev_token[0] != 'symbol': # lhs must be a symbol token
+            if prev_token[0] != 'symbol': # check type of lhs - must be a symbol token
                 raise Exception('You can only assign to a symbol.')
             rhs = self.next_expression(None)
             return self.next_expression(('assignment', prev_token, rhs))
@@ -60,13 +60,15 @@ class Parser:
         elif typ == '(':
             # Calling function, the name of function is the previous token
 
-            args = self._multiple_expressions(',',')')   # the arguments of the function
+            # the arguments of the function can be expressions as well
+            args = self._multiple_expressions(',',')')
 
             # allows for multiple function calls (ex. divide_by(3)(12) => 4)
             return self.next_expression(('call', prev_token, args)) 
 
         elif typ == '{':
             # Get the parameters of the function defintion
+            # params and body is list
             params = self._parameters_list()
             body = self._multiple_expressions(';', '}')
             return self.next_expression(('function'), params, body)
