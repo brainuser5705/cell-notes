@@ -71,7 +71,7 @@ class Parser:
             # params and body is list
             params = self._parameters_list()
             body = self._multiple_expressions(';', '}')
-            return self.next_expression(('function'), params, body)
+            return self.next_expression(('function', params, body))
 
         else:
             raise Exception('Unexpected token:', str((typ,value)))
@@ -107,7 +107,7 @@ class Parser:
                 
                 typ = self.tokens.pointer[0]    # updates type of the pointer token, if correctly written, this should be a ','
                 
-                self.tokens.dispense_pointer()  # move on the next token
+                self.tokens.dispense_pointer()  # move on the next token in the outer parser
                 self._premature_end(end_char) # check to see if the next token is None
 
         return expressions
@@ -159,4 +159,4 @@ def parse(token_stream):
         expression = parser.next_expression(None)
         if expression is not None:
             yield expression
-        parser.tokens.dispense_pointer() # Move on to start of next expression
+        parser.tokens.dispense_pointer() # ignores ;, Move on to start of next expression

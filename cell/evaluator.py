@@ -94,7 +94,7 @@ def _function_call(expr, env):
     # Evaluate the symbol or function token
     func = eval_expr(expr[1], env)
     
-    # Evaluate the arugments
+    # Evaluate the arguments
     args = list((eval_expr(arg, env) for arg in expr[2]))
     
     if func[0] == 'function':
