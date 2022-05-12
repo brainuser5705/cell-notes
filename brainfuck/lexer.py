@@ -24,7 +24,7 @@ def lex(char_stream):
                 yield ('decrement')
             case '.':
                 yield ('output')
-            case ')':
+            case ',':
                 yield ('input')
             case '[':
                 yield ('start_while')

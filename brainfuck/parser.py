@@ -24,8 +24,8 @@ class Parser:
                 raise Exception(" ']' does not have matching '[' ")
 
             case _:
-                return (typ)    # have to do this because we already dispense the pointer
-
+                return (typ,)    # have to do this because we already dispense the pointer
+                # single element tuple
 
     def _get_multiple_expressions(self):
 
