@@ -28,8 +28,10 @@ class Evaluator:
                 print(chr(self.arr[self.index]), end='')
 
             case 'input':
-                entered = input('Input: ')
-                self.arr[self.index] = int(entered)
+                entered = ''
+                while len(entered) != 1:
+                    entered = input('\nInput[one character only]: ')
+                self.arr[self.index] = ord(entered)
 
             case 'while':
                 while self.arr[self.index] != 0:
